@@ -1,55 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!--Include below script in Head tag.-->
-    <link
-      rel="stylesheet"
-      href="https://phoenixinlineuqast.z8.web.core.windows.net/style.css"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://phoenixinlineuqast.z8.web.core.windows.net/aiconcierge.js"></script>
-    <script>
-      if (window.Assistant) {
-        let assistant = new Assistant({
-          target: "target-chat-id",
-          apiKey: "25f74f43-e93d-452a-82f3-0d7adecf2679",
-          productId: "random-id",
-          chatBotType: "LeaseConcierge",
-        });
-        window.onload = function () {
-          assistant.init();
-        };
-      }
-      if (window.dispatcher) {
-        dispatcher.on("bot-ready", (e) => {
-          console.log(e.detail);
-        });
-      }
-    </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>View Test QA InLine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>View Test QA InLine + Popup</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .bot-frame {
+        width: 100%;
+        height: 400px;
+        border: none;
+        margin-bottom: 30px;
+      }
+    </style>
   </head>
   <body>
     <header>
-      <img
-        src="https://view.com.au/viewstatic/lancer/_next/static/media/viewLogo.8f31e2e5.svg"
-        alt="Sample Image"
-        width="400"
-      />
-      <h1>Welcome to View Test InLine Lease</h1>
+      <img src="https://view.com.au/viewstatic/lancer/_next/static/media/viewLogo.8f31e2e5.svg"
+           alt="Sample Image" width="400" />
+      <h1>Welcome to View QA InLine Sales</h1>
     </header>
-
     <section>
       <h2>About the Site</h2>
-      <p>This Site is to test the View InLine Lease Functionality</p>
+      <p>This Site is to test the View QA InLine Sales Functionality</p>
     </section>
-    <div
-      id="target-chat-id"
-      data-id="ai-root"
-    ></div>
+
+    <h3>Inline Bot</h3>
+    <iframe class="bot-frame" id="inline-bot"></iframe>
+
+    <h3>Popup Bot</h3>
+    <iframe class="bot-frame" id="popup-bot"></iframe>
+
     <footer>
       <p>© 2024 View InLine Lease. All rights reserved.</p>
     </footer>
+
+    <script>
+      // Inline bot HTML as a data blob
+      const inlineHTML = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="stylesheet" href="https://phoenixinlineuviewqast.z8.web.core.windows.net/style.css" />
+            <script src="https://phoenixinlineuviewqast.z8.web.core.windows.net/aiconcierge.js"></script>
+            <script>
+              window.onload = function() {
+                if (window.Assistant) {
+                  let assistant = new Assistant({
+                    target: "target-chat-id",
+                    apiKey: "25f74f43-e93d-452a-82f3-0d7adecf2679",
+                    productId: "random-id",
+                    chatBotType: "SalesConcierge",
+                  });
+                  assistant.init();
+                }
+              }
+            </script>
+            <style>body { margin:0; }</style>
+          </head>
+          <body>
+            <div id="target-chat-id"></div>
+          </body>
+        </html>
+      `.trim();
+
+      // Popup bot HTML as a data blob
+      const popupHTML = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="stylesheet" href="https://phoenixpopuviewqast.z8.web.core.windows.net/style.css" />
+            <script src="https://phoenixpopuviewqast.z8.web.core.windows.net/aiconcierge.js"></script>
+            <script>
+              window.onload = function() {
+                if (window.Assistant) {
+                  let assistant = new Assistant({
+                    target: "target-chat-id",
+                    apiKey: "25f74f43-e93d-452a-82f3-0d7adecf2679",
+                    productId: "random-id",
+                    chatBotType: "SalesConcierge",
+                  });
+                  assistant.init();
+                }
+              }
+            </script>
+            <style>body { margin:0; }</style>
+          </head>
+          <body>
+            <div id="target-chat-id"></div>
+          </body>
+        </html>
+      `.trim();
+
+      // Insert HTML into the iframes
+      document.getElementById('inline-bot').src = 'data:text/html;charset=utf-8,' + encodeURIComponent(inlineHTML);
+      document.getElementById('popup-bot').src  = 'data:text/html;charset=utf-8,' + encodeURIComponent(popupHTML);
+    </script>
   </body>
 </html>
